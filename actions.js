@@ -1,4 +1,3 @@
-
 const canvas = document.getElementById("grid");
 const ctx = canvas.getContext("2d");
 canvas.width = 600;
@@ -18,7 +17,7 @@ class Cell {
         this.visited = false;
         this.parent = null;
         this.visitedInSolve = false;
-        this.distance = Infinity; // For Dijkstra/A*
+        this.distance = Infinity;
     }
 
     draw() {
@@ -213,7 +212,6 @@ function solveMazeDijkstra(start, end) {
     const priorityQueue = [start];
     
     while (priorityQueue.length > 0) {
-        // Sort by distance
         priorityQueue.sort((a, b) => a.distance - b.distance);
         const current = priorityQueue.shift();
         
@@ -240,7 +238,6 @@ function solveMazeAStar(start, end) {
     const priorityQueue = [start];
     
     while (priorityQueue.length > 0) {
-        // Sort by f(n) = g(n) + h(n)
         priorityQueue.sort((a, b) => 
             (a.distance + heuristic(a, end)) - (b.distance + heuristic(b, end))
         );
@@ -265,41 +262,52 @@ function solveMazeAStar(start, end) {
 
 function animatePath(path, color) {
     let i = 0;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3;
+    
     function step() {
         if (i < path.length) {
             const cell = path[i];
             const x = cell.x * cellSize;
             const y = cell.y * cellSize;
-            ctx.fillStyle = color;
-            ctx.fillRect(x, y, cellSize - 3, cellSize - 3);
+            
+            const centerX = x + cellSize/2;
+            const centerY = y + cellSize/2;
+            
+            if (i === 0) {
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+            } else {
+                ctx.lineTo(centerX, centerY);
+                ctx.stroke();
+            }
+            
             i++;
-            setTimeout(step, 10); // Slightly slower for better visibility
+            setTimeout(step, 10);
         }
     }
     step();
 }
-
-// Event Listeners with Different Colors
 document.getElementById("BFS").addEventListener("click", () => {
     draw();
     const pathBFS = solveMazeBFS(startCell, endCell);
-    animatePath(pathBFS, "#00FFFF"); // Cyan
+    animatePath(pathBFS, "#00FFFF");
 });
 
 document.getElementById("DFS").addEventListener("click", () => {
     draw();
     const pathDFS = solveMazeDFS(startCell, endCell);
-    animatePath(pathDFS, "#00FF00"); // Lime
+    animatePath(pathDFS, "#00FF00"); 
 });
 
 document.getElementById("Dijkstra").addEventListener("click", () => {
     draw();
     const pathDijkstra = solveMazeDijkstra(startCell, endCell);
-    animatePath(pathDijkstra, "#FF00FF"); // Magenta
+    animatePath(pathDijkstra, "#FF00FF");
 });
 
 document.getElementById("AStar").addEventListener("click", () => {
     draw();
     const pathAStar = solveMazeAStar(startCell, endCell);
-    animatePath(pathAStar, "#FFFF00"); // Yellow
+    animatePath(pathAStar, "#FFFF00"); 
 });

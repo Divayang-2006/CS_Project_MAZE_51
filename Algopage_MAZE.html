@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script defer src="Algopage_js.js"></script>
+	<title>Algorithm Code Examples</title>
+	<link rel="stylesheet" href="gen.css">
+</head>
+
+<body class="algopage">
+	<div id="header-algopage">
+		<div id="icon"><a href="Mainpage_MAZE.html"><img src="Maze_id1gKb1DY5_1.png" div></a></div>
+		<div id="nav">
+			<h1></h1>
+			<h2>Algoritmns that are used in Maze Game</h2>
+		</div>
+		<div id="return"><a href="Mainpage_MAZE.html"><img src="return-button-svgrepo-com.svg"></a></div>
+	</div>
+	</header>
+	<div class="algoritmns">
+		<!-- Dijkstra's Algorithm -->
+		<div class="algorithm-section">
+			<h2>Dijkstra's Algorithm</h2>
+			<div class="code-container">
+				<button class="copy-btn" onclick="copyCode('dijkstra-cpp')">Copy</button>
+				<pre><code id="dijkstra-cpp">// C++ Implementation
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+vector&lt;int&gt; dijkstra(vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;&amp; graph, int start) {
+   int n = graph.size();
+   vector&lt;int&gt; dist(n, INT_MAX);
+   priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, greater&lt;pair&lt;int, int&gt;&gt;&gt; pq;
+   dist[start] = 0;
+   pq.push({0, start});
+   
+   while (!pq.empty()) {
+      auto [d, u] = pq.top();
+      pq.pop();
+      if (d &gt; dist[u]) continue;
+      for (auto&amp; [v, w] : graph[u]) {
+            if (dist[v] &gt; dist[u] + w) {
+               dist[v] = dist[u] + w;
+               pq.push({dist[v], v});
+            }
+      }
+   }
+   return dist;
+}</code></pre>
+			</div>
+
+			<div class="code-container">
+				<button class="copy-btn" onclick="copyCode('dijkstra-java')">Copy</button>
+				<pre><code id="dijkstra-java">// Java Implementation
+import java.util.*;
+
+public class Dijkstra {
+   public static int[] dijkstra(List&lt;List&lt;int[]&gt;&gt; graph, int start) {
+      int n = graph.size();
+      int[] dist = new int[n];
+      Arrays.fill(dist, Integer.MAX_VALUE);
+      PriorityQueue&lt;int[]&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; a[0] - b[0]);
+      dist[start] = 0;
+      pq.add(new int[]{0, start});
+      
+      while (!pq.isEmpty()) {
+            int[] curr = pq.poll();
+            int d = curr[0], u = curr[1];
+            if (d &gt; dist[u]) continue;
+            for (int[] edge : graph.get(u)) {
+               int v = edge[0], w = edge[1];
+               if (dist[v] &gt; dist[u] + w) {
+                  dist[v] = dist[u] + w;
+                  pq.add(new int[]{dist[v], v});
+               }
+            }
+      }
+      return dist;
+   }
+}</code></pre>
+			</div>
+		</div>
+
+		<!-- BFS -->
+		<div class="algorithm-section">
+			<h2>Breadth-First Search (BFS)</h2>
+
+			<div class="code-container">
+				<button class="copy-btn" onclick="copyCode('bfs-cpp')">Copy</button>
+				<pre><code id="bfs-cpp">// C++ Implementation
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+void bfs(vector&lt;vector&lt;int&gt;&gt;&amp; graph, int start) {
+ int n = graph.size();
+ vector&lt;bool&gt; visited(n, false);
+ queue&lt;int&gt; q;
+ 
+ q.push(start);
+ visited[start] = true;
+ 
+ while (!q.empty()) {
+     int u = q.front();
+     q.pop();
+     cout &lt;&lt; u &lt;&lt; " ";
+     
+     for (int v : graph[u]) {
+         if (!visited[v]) {
+             visited[v] = true;
+             q.push(v);
+         }
+     }
+ }
+}</code></pre>
+			</div>
+
+		</div>
+		<div class="code-container">
+			<button class="copy-btn" onclick="copyCode('bfs-java')">Copy</button>
+			<pre><code id="bfs-java">// Java Implementation
+import java.util.*;
+
+public class BFS {
+public static void bfs(List&lt;List&lt;Integer&gt;&gt; graph, int start) {
+  int n = graph.size();
+  boolean[] visited = new boolean[n];
+  Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();
+  
+  queue.add(start);
+  visited[start] = true;
+  
+  while (!queue.isEmpty()) {
+      int u = queue.poll();
+      System.out.print(u + " ");
+      
+      for (int v : graph.get(u)) {
+          if (!visited[v]) {
+              visited[v] = true;
+              queue.add(v);
+          }
+      }
+  }
+}
+}</code></pre>
+		</div>
+	</div>
+
+	<!-- DFS -->
+	<div class="algorithm-section">
+		<h2>Depth-First Search (DFS)</h2>
+
+		<div class="code-container">
+			<button class="copy-btn" onclick="copyCode('dfs-cpp')">Copy</button>
+			<pre><code id="dfs-cpp">// C++ Implementation
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void dfsUtil(vector&lt;vector&lt;int&gt;&gt;&amp; graph, int u, vector&lt;bool&gt;&amp; visited) {
+ visited[u] = true;
+ cout &lt;&lt; u &lt;&lt; " ";
+ 
+ for (int v : graph[u]) {
+     if (!visited[v]) {
+         dfsUtil(graph, v, visited);
+     }
+ }
+}
+
+void dfs(vector&lt;vector&lt;int&gt;&gt;&amp; graph, int start) {
+ vector&lt;bool&gt; visited(graph.size(), false);
+ dfsUtil(graph, start, visited);
+}</code></pre>
+
+
+			<div class="code-container">
+				<button class="copy-btn" onclick="copyCode('dfs-java')">Copy</button>
+				<pre><code id="dfs-java">// Java Implementation
+import java.util.*;
+
+public class DFS {
+ public static void dfs(List&lt;List&lt;Integer&gt;&gt; graph, int start) {
+     boolean[] visited = new boolean[graph.size()];
+     dfsUtil(graph, start, visited);
+ }
+ 
+ private static void dfsUtil(List&lt;List&lt;Integer&gt;&gt; graph, int u, boolean[] visited) {
+     visited[u] = true;
+     System.out.print(u + " ");
+     
+     for (int v : graph.get(u)) {
+         if (!visited[v]) {
+             dfsUtil(graph, v, visited);
+         }
+     }
+ }
+}</code></pre>
+			</div>
+		</div>
+	</div>
+
+	<!-- A* Algorithm -->
+
+	<div class="algorithm-section">
+		<h2>A* Algorithm</h2>
+
+		<div class="code-container">
+			<button class="copy-btn" onclick="copyCode('astar-cpp')">Copy</button>
+			<pre><code id="astar-cpp">// C++ Implementation
+ #include &lt;iostream&gt;
+ #include &lt;vector&gt;
+ #include &lt;queue&gt;
+ #include &lt;cmath&gt;
+ using namespace std;
+ 
+ struct Node {
+     int x, y;
+     double f, g, h;
+     Node* parent;
+     
+     Node(int x, int y) : x(x), y(y), f(0), g(0), h(0), parent(nullptr) {}
+ };
+ 
+ double heuristic(Node* a, Node* b) {
+     return abs(a->x - b->x) + abs(a->y - b->y); // Manhattan distance
+ }
+ 
+ vector&lt;Node*&gt; aStar(Node* start, Node* end) {
+     priority_queue&lt;pair&lt;double, Node*&gt;, vector&lt;pair&lt;double, Node*&gt;&gt;, greater&lt;&gt;&gt; openList;
+     vector&lt;Node*&gt; path;
+     
+     start->g = 0;
+     start->h = heuristic(start, end);
+     start->f = start->g + start->h;
+     openList.push({start->f, start});
+     
+     // Implementation continues with main A* logic...
+     // (Full implementation would include closed list and path reconstruction)
+     
+     return path;
+ }</code></pre>
+		</div>
+
+		<div class="code-container">
+			<button class="copy-btn" onclick="copyCode('astar-java')">Copy</button>
+			<pre><code id="astar-java">// Java Implementation
+ import java.util.*;
+ 
+ class Node implements Comparable&lt;Node&gt; {
+     int x, y;
+     double f, g, h;
+     Node parent;
+     
+     public Node(int x, int y) {
+         this.x = x;
+         this.y = y;
+     }
+     
+     @Override
+     public int compareTo(Node other) {
+         return Double.compare(this.f, other.f);
+     }
+ }
+ 
+ public class AStar {
+     private double heuristic(Node a, Node b) {
+         return Math.abs(a.x - b.x) + Math.abs(a.y - b.y); // Manhattan distance
+     }
+     
+     public List&lt;Node&gt; findPath(Node start, Node end) {
+         PriorityQueue&lt;Node&gt; openList = new PriorityQueue&lt;&gt;();
+         Set&lt;Node&gt; closedList = new HashSet&lt;&gt;();
+         List&lt;Node&gt; path = new ArrayList&lt;&gt;();
+         
+         start.g = 0;
+         start.h = heuristic(start, end);
+         start.f = start.g + start.h;
+         openList.add(start);
+         
+         // Implementation continues with main A* logic...
+         // (Full implementation would include path reconstruction)
+         
+         return path;
+      }
+ </code></pre>
+		</div>
+	</div>
+	</div>
+</body>
+
+</html>

@@ -19,6 +19,9 @@ body {
     background-size: cover;
     background-repeat:round;
 }
+a {
+    text-decoration: none; 
+}
 
 .frontintialpage{
     height:100vh;
@@ -38,6 +41,7 @@ body {
     display: grid;
     position:fixed;
     z-index: 2;
+    border-bottom:white solid 2px;
     grid-template-columns: 200px auto 100px;
     background-color: transparent;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -45,8 +49,6 @@ body {
     font-weight: 400;
     align-content: center;
     place-items: center;
-    /* background: rgb(238,174,202); */
-    /* background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); */
     background-size: contain;
     background-repeat:round;
 }
@@ -80,14 +82,6 @@ body {
     cursor: pointer;
 }
 
-#seprator_line{
-    position:fixed;
-    top: 98px;
-    width:100vw;
-    height: 2px;
-    background-color:snow;
-
-}
 
 #content{
     display: flex;
@@ -138,14 +132,12 @@ body {
     padding: 10px 10px 0px 10px;
     flex-direction: column;
     font-family: monospace;
-    /* border: 2px solid black; */
 }
 #grid_and_algorithms{
     display: flex;
     flex-direction: row;
 }
 #gridtype{
-    /* border: 2px solid black; */
     display: flex;
     place-items: center;
     flex-direction: column;
@@ -184,7 +176,6 @@ body {
 #BFS, #DFS, #Dijkstra, #AStar{
     align-content: center;
     justify-content: center;
-    /* background-image: linear-gradient(to top, #182848  0%, #4b6cb7  100%); */
     background-color: #182848;
     font-family: 'Matrix', monospace;
     font:bold;
@@ -205,5 +196,103 @@ body {
     box-shadow: 0 0 5px white;
     color: #94d1ff;
     text-shadow:0 0 5px whitesmoke;
+    cursor: pointer;
 }
+
+
+body.algopage {
+    font-family: monospace;
+    line-height: 1.6;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+    background-image: linear-gradient(to bottom, #09203f 20%, #537895 100%);
+    min-height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.algoritmns{
+    position:relative;
+    top:120px;
+}
+#header-algopage {
+    align-self: center;
+    height: 90px;
+    width:97%;
+    margin: 5px 5px 5px 3px;
+    border: white solid 2px;
+    border-radius: 15px;
+    display: grid;
+    position:fixed;
+    top:3px;
+    z-index: 2;
+    grid-template-columns: 200px auto 100px;
+    font-family: Matrix;
+    font-size: large;
+    font-weight: 400;
+    align-content: center;
+    place-items: center;
+    background: linear-gradient(180deg, #000000 0%, #0a192f 100%);
+    box-shadow: 0 3px 5px rgba(255, 255, 255, 0.4);
+
+}
+
+
+.algorithm-section {
+    background-color: rgba(10, 25, 47, 0.45);
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0.2, 0.2, 0, 0.4);
+    padding: 25px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.code-container {
+    position: relative;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: rgba(20, 40, 70, 0.5);
+    box-shadow: 0 8px 20px rgba(0.2, 0.2, 0, 0.4);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+pre {
+    margin: 0;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #e6f1ff;
+    display: block;
+    white-space: pre;
+}
+
+
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 12px;
+    background-color: rgba(100, 255, 218, 0.2);
+    color: #64ffda;
+    border: 1px solid #64ffda;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.copy-btn:hover {
+    size-adjust: 3%;
+    background-color: rgba(100, 255, 218, 0.3);
+    transform: translateY(-1px);
+}
+
 
