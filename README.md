@@ -4,8 +4,9 @@
 -> Enable users to interact with the maze.<br>
 -> Provide an educational experience about how different algorithms work.<br>
 -> Demonstrate solutions to the maze using animated visualizations.<br>
+-> It also help User peak into the Code of the path finding algoritm that is used in Maze for Path finding or we can say that it the algoritmns used to search for Nodes in Graph.<br><br>
 
 **Members**<br>
-->Divayang Siddhapura **202451154**
-->Shreeya Jaiswal **202451153**
-->Ayush Vora **202451170**
+->Divayang Siddhapura **202451154**<br>
+->Shreeya Jaiswal **202451153**<br>
+->Ayush Vora **202451170**<br>
